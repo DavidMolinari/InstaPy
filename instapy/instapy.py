@@ -1012,7 +1012,7 @@ class InstaPy:
             photo_urls = get_photo_urls_from_profile(
                 self.browser, username, photos_grab_amount, randomize
             )
-            sleep(1)
+            sleep(2)
             if not isinstance(photo_urls, list):
                 photo_urls = [photo_urls]
 

@@ -1915,7 +1915,7 @@ def click_visibly(browser, element):
 
 def get_action_delay(action):
     """ Get the delay time to sleep after doing actions """
-    defaults = {"like": 2, "comment": 2, "follow": 3, "unfollow": 10, "story": 3}
+    defaults = {"like": 3, "comment": 6, "follow": 6, "unfollow": 16, "story": 6}
     config = Settings.action_delays
 
     if (
