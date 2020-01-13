@@ -1,18 +1,26 @@
 """ Quickstart script for InstaPy usage """
+import sys
 
 # imports
 from instapy import InstaPy
 from instapy import smart_run
+import string
 from instapy import set_workspace
-
 
 # set workspace folder at desired location (default is at your home folder)
 set_workspace(path=None)
+userNames = sys.argv[1].split(',')
+f = open("cred.ini", "r")
+
+user_name = f.readline().strip()
+user_password = f.readline().strip()
+
 
 # get an InstaPy session!
-session = InstaPy()
+session = InstaPy(username=user_name, password=user_password)
 
-with smart_run(session):
+
+with smart_run(session, userNames):
     # general settings
     session.set_quota_supervisor(enabled=True,
                                  sleep_after=["likes", "comments_d", "follows", "unfollows", "server_calls_h"],
@@ -32,12 +40,16 @@ with smart_run(session):
                            skip_business=True,
                            business_percentage=100)
 
-    # ACTIONS
+    # SETTINGS
     session.set_user_interact(amount=5, randomize=True, percentage=50, media='Photo')
     session.set_do_follow(enabled=True, percentage=70)
     session.set_do_like(enabled=True, percentage=70)
     session.set_do_comment(enabled=False, percentage=80)
     session.set_do_story(enabled=True, percentage=70, simulate=False)
-    session.follow_likers(['user1', 'user2'], photos_grab_amount=2, follow_likers_per_photo=3, randomize=True,
+
+    # ACTIONS
+
+
+    session.follow_likers(userNames, photos_grab_amount=2, follow_likers_per_photo=3, randomize=True,
                           sleep_delay=600, interact=True)
 
